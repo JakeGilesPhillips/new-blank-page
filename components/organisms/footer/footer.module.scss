@@ -1,0 +1,18 @@
+@use '~/styles/variables';
+
+.footer {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-top: variables.$borderWidth solid variables.$borderColor;
+  height: variables.$footerHeight;
+
+  .footerButtons {
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+}

@@ -1,0 +1,21 @@
+@use '~/styles/variables';
+
+.folderIcon {
+  cursor: pointer;
+  position: relative;
+  height: 70px;
+  width: 100px;
+  border: variables.$borderWidth solid variables.$borderColor;
+
+  .folderIcon_1 {
+    position: absolute;
+    top: -10px;
+    left: 4px;
+    height: 10px;
+    width: 50px;
+    transform: perspective(10px) rotateX(6deg);
+    border-top: variables.$borderWidth solid variables.$borderColor;
+    border-left: variables.$borderWidth solid variables.$borderColor;
+    border-right: variables.$borderWidth solid variables.$borderColor;
+  }
+}

@@ -1,0 +1,30 @@
+@use '~/styles/variables';
+
+.fileIcon {
+  cursor: pointer;
+  position: relative;
+  height: 85px;
+  width: 65px;
+  border: variables.$borderWidth solid variables.$borderColor;
+
+  .fileIcon_1 {
+    position: absolute;
+    top: -(variables.$borderWidth);
+    right: -(variables.$borderWidth);
+    height: 15px;
+    width: 15px;
+    background: variables.$backgroundColorDark;
+    border-left: variables.$borderWidth solid variables.$borderColor;
+    border-bottom: variables.$borderWidth solid variables.$borderColor;
+  }
+  
+  .fileIcon_2 {
+    position: absolute;
+    top: variables.$borderWidth;
+    right: variables.$borderWidth;
+    height: 18px;
+    width: 18px;
+    transform: rotateZ(45deg);
+    border-top: variables.$borderWidth solid variables.$borderColor;
+  }
+}
