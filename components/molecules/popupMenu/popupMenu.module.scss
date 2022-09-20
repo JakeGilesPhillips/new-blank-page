@@ -1,0 +1,19 @@
+@use '~/styles/variables';
+
+.footerMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: variables.$backgroundColor;
+
+  position: absolute;
+  left: 0;
+  bottom: variables.$menuHeight;
+
+  min-height: variables.$menuHeight;
+  min-width: variables.$menuWidth;
+
+  border-top: variables.$borderWidth solid variables.$borderColor;
+  border-right: variables.$borderWidth solid variables.$borderColor;
+}

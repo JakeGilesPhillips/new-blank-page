@@ -1,17 +1,14 @@
 @use '~/styles/variables';
 
 .window {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   justify-content: flex-start;
-
-  width: 90%;
-  height: 90%;
   border: variables.$borderWidth solid variables.$borderColor;
+  background: variables.$backgroundColor;
+  min-width: 300px;
+  min-height: 200px;
+  max-height: 5vw;
 
   .windowTopBar {
     display: flex;
@@ -19,40 +16,32 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 40px;
+    height: variables.$menuHeight;
     border-bottom: variables.$borderWidth solid variables.$borderColor;
 
     .windowTopBarTitle {
-      width: 50%;
+      height: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      overflow: hidden;
       margin-left: 15px;
+      cursor: move;
 
       span {
-        font-size: 14pt;
+        white-space: nowrap;
+        font-size: 11pt;
       }
     }
 
     .windowTopBarButtons {
       height: 100%;
-      width: 25%;
       display: flex;
       flex-direction: row;
       align-items: center;
       justify-content: flex-end;
-      
-      .windowTopBarButton {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        width: 50px;
-        cursor: pointer;
-        border-left: variables.$borderWidth solid variables.$borderColor;
-        
-        span {
-          font-size: 14pt;
-        }
-      }
     }
   }
 

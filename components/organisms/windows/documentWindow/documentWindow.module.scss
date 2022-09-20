@@ -1,0 +1,11 @@
+@use '~/styles/variables';
+
+.documentWindowRichText {
+  position: relative;
+  color: variables.$textColor;
+  font-family: 'Roboto Mono', monospace;
+
+  h3 {
+    margin-top: 0;
+  }
+}

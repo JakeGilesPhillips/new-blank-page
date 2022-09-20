@@ -1,17 +1,23 @@
 @use 'variables';
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
 html,
-body {
-  padding: 0;
+body,
+#__next {
+  position: absolute;
+  height: 100%;
+  width: 100%;
   margin: 0;
-  background: variables.$backgroundColorLight;
-  // cursor: none;
+  padding: 0;
+  background: variables.$backgroundColor;
 }
 
 a,
 span {
   font-family: 'Roboto Mono', monospace;
   color: variables.$textColor;
+  font-size: 9pt;
 }
 
 a {
@@ -21,13 +27,4 @@ a {
 
 * {
   box-sizing: border-box;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    background: variables.$backgroundColorDark;
-  }
 }

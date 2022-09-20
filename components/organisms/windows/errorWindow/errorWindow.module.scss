@@ -1,0 +1,13 @@
+.errorWindow {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+
+  .error {
+    font-size: 14pt;
+    margin-top: 10px;
+  }
+}

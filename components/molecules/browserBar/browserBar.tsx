@@ -1,5 +1,9 @@
 import { useEffect, useState } from 'react';
-import styles from './browserBar.module.scss';
+import { Position, Size } from '../../../variables/enums';
+import Bar from '../../atoms/bar/bar';
+
+import Button from '../../atoms/button/button';
+import Input from '../../atoms/input/input';
 
 interface BrowserBarProps {
   iframeUrl?: string;
@@ -16,38 +20,16 @@ const BrowserBar = (props: BrowserBarProps) => {
     setUrl(iframeUrl);
   }, [iframeUrl]);
 
-  const onChangeUrl = (ev: any) => {
-    setUrl(ev.nativeEvent.target.value);
-  };
-
   const onEnterUrl = () => {
     setIframeUrl(url);
   };
 
-  const handleKeyDown = (ev: any) => {
-    if (ev.key === 'Enter') onEnterUrl();
-  };
-
   return (
-    <div className={styles.browserBar}>
-      <div className={styles.browserBarButtons}>
-        <div className={styles.browserBarButton}>
-          <span>←</span>
-        </div>
-        <div className={styles.browserBarButton}>
-          <span>→</span>
-        </div>
-        <div className={styles.browserBarButton} onClick={onRefresh}>
-          <span>⟳</span>
-        </div>
-      </div>
-      <div className={styles.browserBarInput}>
-        <input value={url} onChange={onChangeUrl} onKeyDown={handleKeyDown} />
-      </div>
-      <div className={styles.browserBarSearch} onClick={onEnterUrl}>
-        <span>GO</span>
-      </div>
-    </div>
+    <Bar>
+      <Button label="⟳" size={Size.S} border={Position.Right} onClick={onRefresh} />
+      <Input value={url} onValueChange={setUrl} onEnter={onEnterUrl} />
+      <Button label="GO" size={Size.M} border={Position.Left} onClick={onEnterUrl} />
+    </Bar>
   );
 };
 

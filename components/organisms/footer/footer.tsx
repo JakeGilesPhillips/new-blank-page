@@ -1,39 +1,64 @@
 import { useState } from 'react';
+import { observer } from 'mobx-react-lite';
 
-import { MenuItem } from '../../../variables/models';
+import { IItem, IWindow } from '../../../variables/models';
+import { Position, Size } from '../../../variables/enums';
+import { useStore } from '../storeProvider/storeProvider';
 
-import FooterButton from '../../atoms/footer/footerButton/footerButton';
-import FooterClock from '../../atoms/footer/footerClock/footerClock';
-import FooterMenu from '../../molecules/footerMenu/footerMenu';
+import Clock from '../../atoms/clock/clock';
+import Button from '../../atoms/button/button';
+import PopupMenu from '../../molecules/popupMenu/popupMenu';
 
 import styles from './footer.module.scss';
 
 interface FooterProps {
-  items?: MenuItem[];
+  items?: IItem[];
 }
 
 const Footer = (props: FooterProps) => {
+  const { windowStore } = useStore();
+  const { windows } = windowStore;
   const { items = [] } = props;
 
   const [visible, setVisible] = useState<boolean>(false);
 
-  const toggleVisibility = () => {
+  const toggleMenuVisibility = () => {
     if (items?.length === 0) return;
     setVisible(!visible);
   };
 
+  const toggleWindowVisibility = (window: IWindow) => {
+    windowStore.toggleWindow(window?.id ?? -1);
+  };
+
   return (
     <footer className={styles.footer}>
-      {/* Data along the bottom */}
       <div className={styles.footerButtons}>
-        <FooterButton label="MENU" onClick={toggleVisibility} />
+        <Button
+          label="MENU"
+          bold
+          border={Position.Right}
+          size={Size.XL}
+          pattern={'dots'}
+          onClick={toggleMenuVisibility}
+        />
+        {windows?.map((window, index) => (
+          <Button
+            key={index}
+            label={window.title}
+            border={Position.Right}
+            size={Size.L}
+            pattern={'stripes'}
+            active={!window.layout.minimised}
+            onClick={() => toggleWindowVisibility(window)}
+          />
+        ))}
       </div>
-      <FooterClock />
+      <Clock />
 
-      {/* Popup menu */}
-      <FooterMenu items={items} visible={visible} />
+      <PopupMenu items={items} visible={visible} setVisible={toggleMenuVisibility} />
     </footer>
   );
 };
 
-export default Footer;
+export default observer(Footer);

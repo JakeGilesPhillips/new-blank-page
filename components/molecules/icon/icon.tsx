@@ -1,34 +1,27 @@
-import { IconType } from '../../../variables/enums';
-import { MenuItem } from '../../../variables/models';
+/* eslint-disable @next/next/no-img-element */
+import { useState } from 'react';
+import { IItem } from '../../../variables/models';
 
-import FileIcon from '../../atoms/icons/fileIcon/fileIcon';
-import FolderIcon from '../../atoms/icons/folderIcon/folderIcon';
-import ComputerIcon from '../../atoms/icons/computerIcon/computerIcon';
+import { useStore } from '../../organisms/storeProvider/storeProvider';
 
 import styles from './icon.module.scss';
-import MailIcon from '../../atoms/icons/mailIcon/mailIcon';
 
-const Icon = (props: MenuItem) => {
-  const { name, icon } = props;
+const Icon = (props: IItem) => {
+  const { windowStore } = useStore();
+  const { name, iconUrl, window } = props;
 
-  const getIcon = (): JSX.Element => {
-    switch (icon) {
-      case IconType.Home:
-        return <ComputerIcon />;
-      case IconType.Folder:
-        return <FolderIcon />;
-      case IconType.File:
-        return <FileIcon />;
-      case IconType.Mail:
-        return <MailIcon />;
-    }
-    return <></>;
+  const [click] = useState(typeof Audio !== 'undefined' && new Audio('/sounds/click.mp3'));
+
+  const openWindow = () => {
+    click && click.play();
+    windowStore.openWindow(window);
   };
 
   return (
-    <div className={styles.icon}>
-      {getIcon()}
-      <span>{name}</span>
+    <div className={styles.icon} onClick={openWindow}>
+      {iconUrl != null && <img src={iconUrl} alt={name} width={50} height={50} />}
+
+      <span>{name.toLowerCase()}</span>
     </div>
   );
 };

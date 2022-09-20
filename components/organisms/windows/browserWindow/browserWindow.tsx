@@ -5,11 +5,7 @@ import Window, { WindowProps } from '../../../molecules/window/window';
 
 import styles from './browserWindow.module.scss';
 
-interface BrowserWindowProps extends WindowProps {
-  url?: string;
-}
-
-const BrowserWindow = (props: BrowserWindowProps) => {
+const BrowserWindow = (props: WindowProps) => {
   const { url = '' } = props;
 
   const iframeRef = useRef<HTMLIFrameElement | null>(null);

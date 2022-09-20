@@ -1,13 +1,18 @@
 @use '~/styles/variables';
 
 .footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   flex: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: variables.$backgroundColor;
+  z-index: 4;
 
   border-top: variables.$borderWidth solid variables.$borderColor;
-  height: variables.$footerHeight;
+  height: variables.$menuHeight;
 
   .footerButtons {
     height: 100%;

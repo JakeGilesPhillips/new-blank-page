@@ -1,47 +1,45 @@
-import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useEffect, useState } from 'react';
+import { observer } from 'mobx-react-lite';
 
-import { MenuItem } from '../variables/models';
-import { IconType } from '../variables/enums';
+import { IItem } from '../variables/models';
+import { getItems } from '../contentful/setup';
+import useLocalStorage from '../hooks/useLocalStorage';
 
-import Window from '../components/molecules/window/window';
+import Crt from '../components/atoms/crt/crt';
 import Footer from '../components/organisms/footer/footer';
+import Windows from '../components/organisms/windows/windows';
 import IconList from '../components/organisms/iconList/iconList';
-import BrowserWindow from '../components/organisms/windows/browserWindow/browserWindow';
 
-import styles from '../styles/pages/Home.module.scss';
-import { ReactNode, useRef, useState } from 'react';
+interface HomeProps {
+  items: IItem[];
+}
 
-const Home: NextPage = () => {
-  const items: MenuItem[] = [
-    { name: 'Home', icon: IconType.Home },
-    { name: 'Work', icon: IconType.Folder },
-    { name: 'About', icon: IconType.File },
-    { name: 'Contact', icon: IconType.Mail },
-  ];
+const Home = (props: HomeProps) => {
+  const { items } = props;
 
-  // Store windows
-  const windows = useRef<JSX.Element[]>([]).current;
+  const [visited, setVisited] = useLocalStorage('visited', null);
+  const [ready, setReady] = useState<boolean>(false);
+  const showIntro = ready && !visited;
+
+  useEffect(() => setReady(true), []);
 
   return (
-    <div className={styles.container}>
+    <Crt showIntro={showIntro}>
       <Head>
         <title>New Blank Page</title>
       </Head>
 
-      <main className={styles.main}>
-        <div className={styles.sections}>
-          <IconList items={items} />
-          <div className={styles.pages}>
-            {/* <Window title="Work" /> */}
-            <BrowserWindow title="Browser" url="https://www.premiercctvinstalls.co.uk/" />
-          </div>
-        </div>
-      </main>
-
+      <IconList items={items} />
+      <Windows items={items} showIntro={showIntro} setVisited={setVisited} />
       <Footer items={items} />
-    </div>
+    </Crt>
   );
 };
 
-export default Home;
+export async function getStaticProps(params: any) {
+  const items = await getItems();
+  return { props: { items } };
+}
+
+export default observer(Home);

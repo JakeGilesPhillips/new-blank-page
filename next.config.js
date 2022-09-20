@@ -5,9 +5,11 @@ const path = require('path')
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   sassOptions: {
-    includeOptions: [path.join(__dirname, 'styles')],
+    includeOptions: [path.join(__dirname, 'styles'), path.join(__dirname, 'styles/*.scss')],
+  },
+  images: {
+    domains: ['images.ctfassets.net'],
   },
 }
 

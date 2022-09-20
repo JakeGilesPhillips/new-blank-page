@@ -1,11 +1,11 @@
-import { MenuItem } from '../../../variables/models';
+import { IItem } from '../../../variables/models';
 
 import Icon from '../../molecules/icon/icon';
 
 import styles from './iconList.module.scss';
 
 interface IconListProps {
-  items: MenuItem[];
+  items: IItem[];
 }
 
 const IconList = (props: IconListProps) => {

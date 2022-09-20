@@ -1,0 +1,29 @@
+@use '~/styles/variables';
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: variables.$menuHeight;
+  border-color: variables.$borderColor;
+  border-width: variables.$borderWidth;
+  border-style: none;
+  cursor: pointer;
+
+  span {
+    text-align: center;
+    width: 80%;
+    font-size: 10pt;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+}
