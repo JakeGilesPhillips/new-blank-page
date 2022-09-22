@@ -28,16 +28,18 @@ const Home = (props: HomeProps) => {
   }, [visited, uiStore]);
 
   return (
-    <Crt>
+    <main>
       <Head>
         <title>New Blank Page</title>
       </Head>
 
-      <PopupMessage />
-      <IconList items={items} />
-      <Windows items={items} setVisited={setVisited} />
-      <Footer items={items} />
-    </Crt>
+      <Crt>
+        <PopupMessage />
+        <IconList items={items} />
+        <Windows items={items} setVisited={setVisited} />
+        <Footer items={items} />
+      </Crt>
+    </main>
   );
 };
 

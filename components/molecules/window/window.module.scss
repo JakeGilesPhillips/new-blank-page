@@ -62,6 +62,7 @@
 
 @media screen and (max-width: 500px) {
   .window {
+    max-width: 100% !important;
     min-width: 100%;
     transform: unset !important;
     top: unset !important;
