@@ -35,8 +35,6 @@ const Window = (props: WindowProps) => {
   } = props;
   const { size, position, minimised, zIndex } = layout;
 
-  console.log(position);
-
   const bringWindowToFront = () => {
     uiStore.toggleMenu(false);
     windowStore.bringWindowToTop(id);
