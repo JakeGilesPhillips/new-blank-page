@@ -1,0 +1,16 @@
+@use '~/styles/variables';
+
+.enterScreen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  flex: 1;
+
+  .enterScreenButton {
+    border: variables.$borderWidth solid variables.$borderColor;
+    width: 80%;
+    max-width: 300px;
+    border-radius: 10px;
+  }
+}

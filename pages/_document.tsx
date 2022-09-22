@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import { Html, Head, Main, NextScript } from 'next/document';
 
 const Document = () => {
@@ -8,7 +9,7 @@ const Document = () => {
           name="description"
           content="New Blank Page is the home for the creative web and mobile design work of Jake Giles-Phillips, Bristol."
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/icons/page.png" />
       </Head>
       <body>
         <Main />

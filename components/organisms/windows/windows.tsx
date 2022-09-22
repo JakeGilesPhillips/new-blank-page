@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 
+import { defaultLayout } from '../../../variables/constants';
 import { IItem, IWindow } from '../../../variables/models';
 import { WindowType } from '../../../variables/enums';
 import { useStore } from '../storeProvider/storeProvider';
@@ -13,26 +14,30 @@ import DocumentWindow from './documentWindow/documentWindow';
 
 import styles from './windows.module.scss';
 import ErrorWindow from './errorWindow/errorWindow';
+import EmailWindow from './emailWindow/emailWindow';
+import Window from '../../molecules/window/window';
+import TerminalWindow from './terminalWindow/terminalWindow';
 
 interface WindowsProps {
   items: IItem[];
-  showIntro: boolean;
   setVisited: (value: any) => void;
 }
 
 const Windows = (props: WindowsProps) => {
-  const { items, showIntro, setVisited } = props;
+  const { items, setVisited } = props;
 
-  const { windowStore } = useStore();
+  const { windowStore, uiStore } = useStore();
+  const { showStartUp } = uiStore;
   const { windows } = windowStore;
 
-  const introTime = showIntro ? 11000 : 2000;
+  const introTime = showStartUp ? 11000 : 2000;
   const [click] = useState(typeof Audio !== 'undefined' && new Audio('/sounds/click.mp3'));
+  const [ready, setReady] = useState<boolean>(false);
 
   useEffect(() => {
     const timeout = setTimeout(openFirstWindow, introTime);
     return () => clearTimeout(timeout);
-  }, [showIntro, items, windowStore]);
+  }, [showStartUp, items, windowStore]);
 
   const openFirstWindow = () => {
     click && click.play();
@@ -50,10 +55,10 @@ const Windows = (props: WindowsProps) => {
         return <DocumentWindow key={index} {...window} />;
       case WindowType.Browser:
         return <BrowserWindow key={index} {...window} />;
-      case WindowType.Error:
       case WindowType.Mail:
-        return <ErrorWindow key={index} {...window} />;
+        return <EmailWindow key={index} {...window} />;
     }
+    return <ErrorWindow key={index} {...window} />;
   };
 
   return (
@@ -61,6 +66,8 @@ const Windows = (props: WindowsProps) => {
       {windows?.map((window, index) => {
         return buildWindow(index, window);
       })}
+
+      {/* <TerminalWindow /> */}
     </div>
   );
 };

@@ -7,5 +7,7 @@
   justify-content: space-between;
   width: 100%;
   height: variables.$menuHeight;
-  border-bottom: variables.$borderWidth solid variables.$borderColor;
+  border-color: variables.$borderColor;
+  border-width: variables.$borderWidth;
+  border-style: none;
 }

@@ -15,3 +15,9 @@
   height: calc(100% - variables.$menuHeight);
   margin: 20px 0;
 }
+
+@media screen and (max-width: 500px) {
+  .iconList {
+    flex-direction: row;
+  }
+}

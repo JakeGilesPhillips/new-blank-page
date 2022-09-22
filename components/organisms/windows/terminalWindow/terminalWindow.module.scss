@@ -1,0 +1,15 @@
+@use '~/styles/variables';
+
+.terminalWindow {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: variables.$borderWidth solid variables.$borderColor;
+  background: variables.$backgroundColor;
+  width: 400px;
+  height: 200px;
+
+  .terminalWindowTyper {
+    padding-left: 10px;
+  }
+}

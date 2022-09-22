@@ -16,7 +16,7 @@ const FolderBar = (props: FolderBarProps) => {
   const size = `${items.length * Math.floor(Math.random() * 1000)}kb`;
 
   return (
-    <Bar>
+    <Bar border={Position.Bottom}>
       <Button enabled={false} label={count} size={Size.XL} border={Position.Right} />
       <Button enabled={false} label={size} size={Size.XL} border={Position.Left} />
     </Bar>

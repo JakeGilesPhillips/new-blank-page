@@ -22,15 +22,28 @@ export interface IWindow {
   id?: number;
   title: string;
   type: WindowType;
+  iconUrl?: string;
   layout: IWindowLayout;
   items?: IItem[];
   url?: string;
-  document: Document;
+  document?: Document;
 }
 
 export interface IItem {
   name: string;
   order: number;
   iconUrl?: string;
+  link?: string;
   window: IWindow;
+}
+
+export interface IPopupMessage {
+  message: string;
+  button?: string;
+}
+
+export interface IContactForm {
+  from: string;
+  subject: string;
+  message: string;
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { CSSProperties, useMemo, useState } from 'react';
 import { Position, Size } from '../../../variables/enums';
 
@@ -5,8 +6,10 @@ import styles from './button.module.scss';
 
 interface ButtonProps {
   label?: string;
+  icon?: string;
   size?: Size;
   bold?: boolean;
+  wide?: boolean;
   enabled?: boolean;
   active?: boolean;
   border?: Position;
@@ -17,8 +20,10 @@ interface ButtonProps {
 const Button = (props: ButtonProps) => {
   const {
     label = '',
+    icon = null,
     size = Size.S,
-    bold,
+    bold = false,
+    wide = false,
     enabled = true,
     active = true,
     border,
@@ -29,6 +34,8 @@ const Button = (props: ButtonProps) => {
   const [click] = useState(typeof Audio !== 'undefined' && new Audio('/sounds/click.mp3'));
 
   const width: string = useMemo(() => {
+    if (wide) return '100%';
+
     switch (size) {
       case Size.XS:
         return `25px`;
@@ -40,7 +47,7 @@ const Button = (props: ButtonProps) => {
         return `150px`;
     }
     return `200px`;
-  }, [size]);
+  }, [size, wide]);
 
   const _pattern: CSSProperties = useMemo(() => {
     switch (pattern) {
@@ -84,9 +91,13 @@ const Button = (props: ButtonProps) => {
       style={{ width, ..._pattern, ..._border, opacity: active ? 1 : 0.5 }}
       onClick={onButtonClick}
     >
-      <span style={{ fontWeight: bold ? 'bold' : 'normal', textTransform: bold ? 'uppercase' : 'lowercase' }}>
-        {label}
-      </span>
+      {size <= Size.S && icon != null ? (
+        <img src={icon} width={30} height={30} alt={label} />
+      ) : (
+        <span style={{ fontWeight: bold ? 'bold' : 'normal', textTransform: bold ? 'uppercase' : 'lowercase' }}>
+          {label}
+        </span>
+      )}
     </div>
   );
 };

@@ -1,0 +1,15 @@
+@use '~/styles/variables';
+
+.emailBar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .emailBarTitle {
+    padding-left: 12px;
+    padding-top: 12px;
+    height: 100%;
+    width: 100px;
+    border-right: variables.$borderWidth solid variables.$borderColor;
+  }
+}

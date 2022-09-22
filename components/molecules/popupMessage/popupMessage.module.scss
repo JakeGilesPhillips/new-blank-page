@@ -1,0 +1,57 @@
+@use '~/styles/variables';
+
+.popupMessage {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 99999999999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  .popupMessageInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: variables.$backgroundColor;
+    border: variables.$borderColor solid variables.$borderWidth;
+    width: 90%;
+    max-width: 300px;
+    min-height: 100px;
+
+    .popupMessageTitle {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding-left: 10px;
+      flex: 1;
+    }
+
+    .popupMessageMessage {
+      width: 100%;
+      margin-bottom: 20px;
+      padding: 5px 10px;
+    }
+
+    .popupMessageButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      max-height: 30px;
+      overflow: hidden;
+      border: variables.$borderColor solid variables.$borderWidth;
+    }
+  }
+}

@@ -8,6 +8,10 @@ export default class WindowStore {
 
   private maxWindows: number = 5;
 
+  private warnings: number = 0;
+
+  private warningTier: number = 0;
+
   items: IItem[] = [];
 
   windows: IWindow[] = [];
@@ -45,7 +49,29 @@ export default class WindowStore {
     return 0;
   }
 
-  openWindow = (window: IWindow) => {    
+  private showWarning = (): void => {
+    if (this.windows.length < this.maxWindows) return;
+    const message = warningMessages[this.warningTier][this.warnings];
+    
+    // Iterate message
+    this.warnings += 1;
+    if (this.warnings >= warningMessages[this.warningTier].length) {
+      this.windows = [];
+      this.warnings = 0;
+
+      if (this.warningTier === 1) {
+        this.rootStore.uiStore.shutdown();
+        this.warningTier = 0;
+      } else {
+        this.warningTier += 1;
+      }
+    }
+    this.rootStore.uiStore.togglePopupMessage({ message });
+  }
+
+  openWindow = (window: IWindow) => {  
+    if (!window.title) return;
+      
     // If window is already open bring to top
     const existing = this.findWindowByName(window.title); 
     if (existing && existing.id != null) return this.bringWindowToTop(existing.id);
@@ -56,8 +82,8 @@ export default class WindowStore {
     const position = getWindowPosition(this.windows, window);
     this.windows = this.windows.concat({ ...window, id, layout: { ...window.layout, position, zIndex } });
   
-    // Clear the oldest window if going past max
-    if (this.windows.length > this.maxWindows) this.windows.shift();
+    // Show warning message
+    this.showWarning();
   }
 
   bringWindowToTop = (id: number) => {
@@ -91,3 +117,18 @@ export default class WindowStore {
     this.windows = this.windows.filter((w) => w.id !== id);
   }
 }
+
+const warningMessages1 = [
+  "You have too many windows open, please close some.",
+  "You have TOO MANY windows open. I am struggling here, PLEASE.",
+  "Open one more window and I will be forced to close them all. Try me.",
+  "I did warn you.",
+];
+
+const warningMessages2 = [
+  "Well well well. Look who thinks they're funny.",
+  "Oh you wanna play this game do you. Very well, see what happens.",
+  "[SHUTDOWN]"
+]
+
+const warningMessages = [warningMessages1, warningMessages2];

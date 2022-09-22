@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Position, Size } from '../../../variables/enums';
-import Bar from '../../atoms/bar/bar';
 
+import Bar from '../../atoms/bar/bar';
 import Button from '../../atoms/button/button';
 import Input from '../../atoms/input/input';
 
@@ -11,7 +11,7 @@ interface BrowserBarProps {
   onRefresh?: () => void;
 }
 
-const BrowserBar = (props: BrowserBarProps) => {
+const EmailBar = (props: BrowserBarProps) => {
   const { iframeUrl = '', setIframeUrl = () => null, onRefresh = () => null } = props;
 
   const [url, setUrl] = useState<string>(iframeUrl);
@@ -25,7 +25,7 @@ const BrowserBar = (props: BrowserBarProps) => {
   };
 
   return (
-    <Bar>
+    <Bar border={Position.Bottom}>
       <Button label="⟳" size={Size.S} border={Position.Right} onClick={onRefresh} />
       <Input value={url} onValueChange={setUrl} onEnter={onEnterUrl} />
       <Button label="GO" size={Size.M} border={Position.Left} onClick={onEnterUrl} />
@@ -33,4 +33,4 @@ const BrowserBar = (props: BrowserBarProps) => {
   );
 };
 
-export default BrowserBar;
+export default EmailBar;

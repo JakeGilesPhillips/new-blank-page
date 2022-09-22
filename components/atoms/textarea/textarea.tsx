@@ -1,12 +1,12 @@
-import { InputHTMLAttributes } from 'react';
-import styles from './input.module.scss';
+import { TextareaHTMLAttributes } from 'react';
+import styles from './textarea.module.scss';
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  onValueChange?: (value: string) => void;
+interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  onValueChange: (value: string) => void;
   onEnter?: (value: string) => void;
 }
 
-const Input = (props: InputProps) => {
+const TextArea = (props: TextAreaProps) => {
   const { onValueChange = () => null, onEnter = () => null, readOnly } = props;
 
   const onChange = (ev: any) => {
@@ -20,10 +20,10 @@ const Input = (props: InputProps) => {
   };
 
   return (
-    <div className={styles.input}>
-      <input {...props} onChange={onChange} onKeyDown={handleKeyDown} />
+    <div className={styles.textarea}>
+      <textarea {...props} onChange={onChange} onKeyDown={handleKeyDown} />
     </div>
   );
 };
 
-export default Input;
+export default TextArea;

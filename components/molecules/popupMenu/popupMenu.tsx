@@ -1,5 +1,8 @@
+import { observer } from 'mobx-react-lite';
+import { useWindowSize } from '../../../hooks/useWindowSize';
 import { Position, Size } from '../../../variables/enums';
 import { IItem } from '../../../variables/models';
+import Bar from '../../atoms/bar/bar';
 
 import Button from '../../atoms/button/button';
 import { useStore } from '../../organisms/storeProvider/storeProvider';
@@ -8,34 +11,50 @@ import styles from './popupMenu.module.scss';
 
 interface PopupMenuProps {
   items: IItem[];
-  visible?: boolean;
-  setVisible?: (visible?: boolean) => void;
 }
 
 const PopupMenu = (props: PopupMenuProps) => {
-  const { windowStore } = useStore();
-  const { items, visible = false, setVisible = () => null } = props;
+  const { windowStore, uiStore } = useStore();
+  const { menuOpen } = uiStore;
+  const { items } = props;
+
+  const size = useWindowSize();
+  const wide = size.width < 500;
 
   const onButtonPress = (item: IItem) => {
-    setVisible(false);
+    uiStore.toggleMenu(false);
     windowStore.openWindow(item.window);
   };
 
-  if (!visible) return <></>;
+  if (!menuOpen) return <></>;
   return (
-    <div className={styles.footerMenu}>
+    <div className={styles.popupMenu}>
       {items?.map((item, index) => (
         <Button
           key={index}
           label={item.name}
-          border={index < items.length - 1 ? Position.Bottom : undefined}
+          border={Position.Bottom}
           size={Size.XL}
+          wide={wide}
           pattern="stripes"
           onClick={() => onButtonPress(item)}
         />
       ))}
+      <div className={styles.popupMenuDefaults}>
+        <Bar border={Position.Top}>
+          <Button label="Log Off" wide size={Size.M} pattern="stripes" onClick={() => uiStore.logout()} />
+          <Button
+            label="Shut Down"
+            wide
+            border={Position.Left}
+            size={Size.M}
+            pattern="stripes"
+            onClick={() => uiStore.shutdown()}
+          />
+        </Bar>
+      </div>
     </div>
   );
 };
 
-export default PopupMenu;
+export default observer(PopupMenu);

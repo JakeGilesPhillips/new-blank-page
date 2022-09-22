@@ -8,7 +8,8 @@
   background: variables.$backgroundColor;
   min-width: 300px;
   min-height: 200px;
-  max-height: 5vw;
+  max-width: unset !important;
+  max-height: unset !important;
 
   .windowTopBar {
     display: flex;
@@ -56,5 +57,14 @@
       width: 100%;
       height: 100%;
     }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .window {
+    min-width: 100%;
+    transform: unset !important;
+    top: unset !important;
+    bottom: 10px !important;
   }
 }

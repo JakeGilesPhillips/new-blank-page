@@ -7,18 +7,21 @@ import { useStore } from '../../organisms/storeProvider/storeProvider';
 import styles from './icon.module.scss';
 
 const Icon = (props: IItem) => {
-  const { windowStore } = useStore();
-  const { name, iconUrl, window } = props;
+  const { windowStore, uiStore } = useStore();
+  const { name, iconUrl, link, window: _window } = props;
 
   const [click] = useState(typeof Audio !== 'undefined' && new Audio('/sounds/click.mp3'));
 
-  const openWindow = () => {
+  const onIconClick = () => {
     click && click.play();
-    windowStore.openWindow(window);
+    uiStore.toggleMenu(false);
+
+    if (link != null) window.open(link, '_blank', 'noopener,noreferrer');
+    else windowStore.openWindow(_window);
   };
 
   return (
-    <div className={styles.icon} onClick={openWindow}>
+    <div className={styles.icon} onClick={onIconClick}>
       {iconUrl != null && <img src={iconUrl} alt={name} width={50} height={50} />}
 
       <span>{name.toLowerCase()}</span>

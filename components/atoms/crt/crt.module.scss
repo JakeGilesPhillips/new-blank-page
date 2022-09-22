@@ -1,6 +1,6 @@
 @use '~/styles/variables';
 
-.crt {
+#crt {
   position: absolute;
   top: 0;
   left: 0;
@@ -10,17 +10,26 @@
   margin: 10px;
   border: variables.$borderWidth solid variables.$borderColor;
   overflow: hidden;
-
+  z-index: 99998;
   animation: textShadow 2.0s infinite;
+
+  #crtWrapper {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+
+    &.out {
+      animation: turn-off .8s linear forwards;
+    }
+  }
 
   .crtTurnOn {
     position: absolute;
     height: 100%;
     width: 100%;
-    z-index: 99;
-    pointer-events: none;
+    z-index: 99999;
     background-color: variables.$backgroundColor;
-
+    opacity: 0.0;
     animation: turn-on 4s 0.5s linear forwards;
   }
 
@@ -28,39 +37,41 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    z-index: 97;
+    z-index: 99997;
     background-color: variables.$backgroundColor;
     opacity: 0.0;
-
-    animation: fadeIn 1s 8s linear forwards;
+    animation: fadeIn 1s linear forwards;
   }
 
-  &::before {
-    content: " ";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(255, 255, 255, 0.02)), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-    z-index: 99999999999;
-    background-size: 100% 6px, 6px 100%;
-    pointer-events: none;
-    animation: flicker 8.0s infinite;
+  &.on {
+    &::before {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(255, 255, 255, 0.02)), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      background-size: 100% 10px, 10px 100%;
+      z-index: 99999999999;
+      pointer-events: none;
+      // animation: flicker 8.0s infinite;
+    }
   }
 }
 
 @keyframes fadeIn {
   0% {
-    opacity: 0.0;
+    opacity: 0.0
   }
 
   100% {
-    opacity: 1.0;
+    opacity: 1.0
   }
 }
 
+// Thanks to Alec Clownes for these http://aleclownes.com/2017/02/01/crt-display.html
 @keyframes flicker {
   0% {
     opacity: 0.27861;
@@ -147,6 +158,7 @@
   }
 }
 
+// Thanks to Alec Clownes for these http://aleclownes.com/2017/02/01/crt-display.html
 @keyframes textShadow {
   0% {
     text-shadow: 0.4389924193300864px 0 1px rgba(0, 30, 255, 0.7), -0.4389924193300864px 0 1px rgba(255, 0, 80, 0.4), 0 0 3px;
@@ -233,6 +245,7 @@
   }
 }
 
+// Thanks to Lucas Bebber for these https://codepen.io/lbebber/pen/XJRdrV
 @keyframes turn-on {
   0% {
     transform: scale(1, 0.8) translate3d(0, 0, 0);
@@ -268,8 +281,31 @@
 
   100% {
     transform: scale(1, 1) translate3d(0, 0, 0);
-    -webkit-filter: contrast(1) brightness(1.2) saturate(1.3);
-    filter: contrast(1) brightness(1.2) saturate(1.3);
-    opacity: 0;
+    -webkit-filter: contrast(1) brightness(1) saturate(1);
+    filter: contrast(1) brightness(1) saturate(1);
+    opacity: 1;
+  }
+}
+
+// Thanks to Lucas Bebber for these https://codepen.io/lbebber/pen/XJRdrV
+@keyframes turn-off {
+  0% {
+    transform: scale(1, 1.3) translate3d(0, 0, 0);
+    -webkit-filter: brightness(1);
+    filter: brightness(1);
+    opacity: 1;
+  }
+
+  60% {
+    transform: scale(1.3, 0.001) translate3d(0, 0, 0);
+    -webkit-filter: brightness(10);
+    filter: brightness(10);
+  }
+
+  100% {
+    animation-timing-function: cubic-bezier(0.755, 0.050, 0.855, 0.060);
+    transform: scale(0.000, 0.0001) translate3d(0, 0, 0);
+    -webkit-filter: brightness(50);
+    filter: brightness(50);
   }
 }

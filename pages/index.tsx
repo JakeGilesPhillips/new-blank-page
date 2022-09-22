@@ -10,28 +10,32 @@ import Crt from '../components/atoms/crt/crt';
 import Footer from '../components/organisms/footer/footer';
 import Windows from '../components/organisms/windows/windows';
 import IconList from '../components/organisms/iconList/iconList';
+import { useStore } from '../components/organisms/storeProvider/storeProvider';
+import PopupMessage from '../components/molecules/popupMessage/popupMessage';
 
 interface HomeProps {
   items: IItem[];
 }
 
 const Home = (props: HomeProps) => {
+  const { uiStore } = useStore();
   const { items } = props;
 
   const [visited, setVisited] = useLocalStorage('visited', null);
-  const [ready, setReady] = useState<boolean>(false);
-  const showIntro = ready && !visited;
 
-  useEffect(() => setReady(true), []);
+  useEffect(() => {
+    uiStore.toggleStartup(!visited);
+  }, [visited, uiStore]);
 
   return (
-    <Crt showIntro={showIntro}>
+    <Crt>
       <Head>
         <title>New Blank Page</title>
       </Head>
 
+      <PopupMessage />
       <IconList items={items} />
-      <Windows items={items} showIntro={showIntro} setVisited={setVisited} />
+      <Windows items={items} setVisited={setVisited} />
       <Footer items={items} />
     </Crt>
   );

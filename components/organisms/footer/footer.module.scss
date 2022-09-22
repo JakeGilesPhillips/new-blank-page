@@ -9,7 +9,7 @@
   justify-content: space-between;
   align-items: center;
   background-color: variables.$backgroundColor;
-  z-index: 4;
+  z-index: 99999999;
 
   border-top: variables.$borderWidth solid variables.$borderColor;
   height: variables.$menuHeight;
@@ -19,5 +19,23 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+
+    .footerWindowButtons {
+      height: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+  }
+
+}
+
+@media screen and (max-width: 500px) {
+  .footer {
+    .footerButtons {
+      .footerWindowButtons {
+        display: none !important;
+      }
+    }
   }
 }

@@ -4,17 +4,14 @@
   position: absolute;
   height: 100%;
   width: 100%;
-  z-index: 98;
   pointer-events: none;
-  opacity: 1.0;
   background-color: variables.$backgroundColor;
-  opacity: 0.0;
-  animation: fadeInOut 8s 1.7s linear forwards;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: 1s;
 
   .username {
     margin-top: 5px;
@@ -34,23 +31,5 @@
     height: 25px;
     min-width: 120px;
     border-bottom: variables.$borderWidth solid variables.$borderColor;
-  }
-}
-
-@keyframes fadeInOut {
-  0% {
-    opacity: 0.0;
-  }
-
-  10% {
-    opacity: 1.0;
-  }
-
-  95% {
-    opacity: 1.0;
-  }
-
-  100% {
-    opacity: 0.0;
   }
 }

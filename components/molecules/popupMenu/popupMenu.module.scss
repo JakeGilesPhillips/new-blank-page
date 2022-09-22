@@ -1,6 +1,6 @@
 @use '~/styles/variables';
 
-.footerMenu {
+.popupMenu {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -8,7 +8,7 @@
   background: variables.$backgroundColor;
 
   position: absolute;
-  left: 0;
+  left: -(variables.$borderWidth);
   bottom: variables.$menuHeight;
 
   min-height: variables.$menuHeight;
@@ -16,4 +16,24 @@
 
   border-top: variables.$borderWidth solid variables.$borderColor;
   border-right: variables.$borderWidth solid variables.$borderColor;
+  z-index: 99995;
+
+  .popupMenuDefaults {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    margin-top: 15px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .popupMenu {
+    min-width: 100%;
+    border-right: none;
+    left: 0;
+
+  }
 }
