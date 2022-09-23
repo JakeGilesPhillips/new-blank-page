@@ -10,6 +10,7 @@ import { useStore } from '../../organisms/storeProvider/storeProvider';
 
 import styles from './window.module.scss';
 import Bar from '../../atoms/bar/bar';
+import { useWindowSize } from '../../../hooks/useWindowSize';
 
 export interface WindowProps extends IWindow {
   topBarContent?: ReactNode;
@@ -55,12 +56,15 @@ const Window = (props: WindowProps) => {
       className={styles.window}
       bounds="parent"
       default={{
-        x: position?.x ?? 200,
-        y: position?.y ?? 0,
+        ...position,
         width: size?.width ?? `90%`,
         height: size?.height ?? `90%`,
       }}
-      style={{ zIndex, opacity: minimised ? '0' : '1', pointerEvents: minimised ? 'none' : 'all' }}
+      style={{
+        zIndex,
+        opacity: minimised ? '0' : '1',
+        pointerEvents: minimised ? 'none' : 'all',
+      }}
       dragGrid={[30, 30]}
       onMouseDown={() => bringWindowToFront()}
       onDragStop={(e, d) => windowStore.updateWindowPosition(id, d)}

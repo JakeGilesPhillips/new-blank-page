@@ -7,6 +7,7 @@ import EmailBar from '../../../molecules/emailBar/emailBar';
 import SendBar from '../../../molecules/sendBar/sendBar';
 
 import Window, { WindowProps } from '../../../molecules/window/window';
+import { PopupType } from '../../../../variables/enums';
 
 const EmailWindow = (props: WindowProps) => {
   const { uiStore } = useStore();
@@ -19,9 +20,9 @@ const EmailWindow = (props: WindowProps) => {
     const success = await sendContactEmail({ from, subject, message });
     if (success) {
       onDelete();
-      uiStore.togglePopupMessage({ message: 'Mail sent successfully!' });
+      uiStore.togglePopupMessage({ type: PopupType.Alert, message: 'Mail sent successfully!' });
     } else {
-      uiStore.togglePopupMessage({ message: 'Mail failed to send, please try again.' });
+      uiStore.togglePopupMessage({ type: PopupType.Warning, message: 'Mail failed to send, please try again.' });
     }
   };
 

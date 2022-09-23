@@ -36,7 +36,7 @@ const Home = (props: HomeProps) => {
       <Crt>
         <PopupMessage />
         <IconList items={items} />
-        <Windows items={items} setVisited={setVisited} />
+        <Windows items={items} visited={visited} setVisited={setVisited} />
         <Footer items={items} />
       </Crt>
     </main>

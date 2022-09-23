@@ -1,6 +1,12 @@
+export enum PopupType {
+  Alert = 0,
+  Warning = 1,
+  Error = 2,
+}
+
 export enum WindowType {
   Home = 0,
-  Folder = 1, 
+  Folder = 1,
   Page = 2,
   Browser = 3,
   Mail = 4,

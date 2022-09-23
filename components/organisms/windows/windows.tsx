@@ -20,11 +20,12 @@ import TerminalWindow from './terminalWindow/terminalWindow';
 
 interface WindowsProps {
   items: IItem[];
+  visited: boolean;
   setVisited: (value: any) => void;
 }
 
 const Windows = (props: WindowsProps) => {
-  const { items, setVisited } = props;
+  const { items, visited, setVisited } = props;
 
   const { windowStore, uiStore } = useStore();
   const { showStartUp } = uiStore;
@@ -32,7 +33,6 @@ const Windows = (props: WindowsProps) => {
 
   const introTime = showStartUp ? 11000 : 2000;
   const [click] = useState(typeof Audio !== 'undefined' && new Audio('/sounds/click.mp3'));
-  const [ready, setReady] = useState<boolean>(false);
 
   useEffect(() => {
     const timeout = setTimeout(openFirstWindow, introTime);
@@ -40,6 +40,7 @@ const Windows = (props: WindowsProps) => {
   }, [showStartUp, items, windowStore]);
 
   const openFirstWindow = () => {
+    if (visited) return;
     click && click.play();
     windowStore.openWindow(items?.[0]?.window);
     setVisited(true);

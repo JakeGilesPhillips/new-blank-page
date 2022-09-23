@@ -10,10 +10,21 @@ body,
   width: 100%;
   margin: 0;
   padding: 0;
+  border-radius: 10px;
   background: variables.$backgroundColor;
 }
 
+body {
+  height: calc(100% - 20px - (variables.$borderWidth * 2));
+  width: calc(100% - 20px);
+  border-radius: 10px;
+  margin: 10px;
+  border: variables.$borderWidth solid variables.$borderColor;
+  overflow: hidden;
+}
+
 a,
+p,
 span,
 input,
 textarea {

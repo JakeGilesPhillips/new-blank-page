@@ -1,7 +1,7 @@
 import { IWindowLayout } from './models';
 
 export const defaultLayout: IWindowLayout = {
-  position: { x: 80, y: 0 },
+  position: { x: 150, y: 0 },
   size: { width: `50%`, height: `60%` },
   minimised: false,
   zIndex: 0,

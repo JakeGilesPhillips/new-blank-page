@@ -20,7 +20,7 @@
   -ms-user-select: none;
   user-select: none;
 
-  .popupMessageInner {
+  #popupMessageInner {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,6 +29,18 @@
     width: 90%;
     max-width: 300px;
     min-height: 100px;
+
+    &.shake {
+      animation: shake .1s ease-out 5;
+    }
+
+    .popupMessageIcon {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      padding-left: 5px;
+      padding-bottom: 2px;
+    }
 
     .popupMessageTitle {
       display: flex;
@@ -53,5 +65,29 @@
       overflow: hidden;
       border: variables.$borderColor solid variables.$borderWidth;
     }
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translate(0, 0) rotateZ(0deg);
+  }
+
+  1% {
+    transform: translate(-4px, -2px) rotateZ(3deg);
+  }
+
+  25% {
+    transform: translate(4px, 2px) rotateZ(-3deg);
+  }
+
+  50% {
+    transform: translate(4px, -2px) rotateZ(3deg);
+  }
+
+  75% {
+    transform: translate(-4px, 2px) rotateZ(-3deg);
   }
 }

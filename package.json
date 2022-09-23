@@ -9,9 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@contentful/rich-text-html-renderer": "^15.13.1",
-    "@contentful/rich-text-react-renderer": "^15.12.1",
-    "@types/nodemailer": "^6.4.6",
     "contentful": "^9.2.4",
     "mobx": "^6.6.2",
     "mobx-react-lite": "^3.4.0",
@@ -21,13 +18,14 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
+    "@contentful/rich-text-react-renderer": "^15.12.1",
     "@types/node": "18.7.18",
+    "@types/nodemailer": "^6.4.6",
     "@types/react": "18.0.20",
     "@types/react-dom": "18.0.6",
     "date-fns": "^2.29.3",
     "eslint": "8.23.1",
     "eslint-config-next": "12.3.0",
-    "lorem-ipsum": "^2.0.8",
     "react-rnd": "^10.3.7",
     "react-type-animation": "^2.1.1",
     "sass": "^1.54.9",

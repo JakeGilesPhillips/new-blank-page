@@ -2,13 +2,9 @@
 
 #crt {
   position: absolute;
-  top: 0;
-  left: 0;
-  height: calc(100% - 20px - (variables.$borderWidth * 2));
-  width: calc(100% - 20px - (variables.$borderWidth * 2));
+  height: 100%;
+  width: 100%;
   border-radius: 10px;
-  margin: 10px;
-  border: variables.$borderWidth solid variables.$borderColor;
   overflow: hidden;
   z-index: 99998;
   animation: textShadow 2.0s infinite;
@@ -41,6 +37,14 @@
     background-color: variables.$backgroundColor;
     opacity: 0.0;
     animation: fadeIn 1s linear forwards;
+  }
+
+  .crtStatic {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 99997;
+    background-color: variables.$backgroundColor;
   }
 
   &.on {

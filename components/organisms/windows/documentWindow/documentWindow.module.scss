@@ -5,7 +5,10 @@
   color: variables.$textColor;
   font-family: 'Roboto Mono', monospace;
 
-  h3 {
+  h1,
+  h2,
+  h3,
+  h4 {
     margin-top: 0;
   }
 }
