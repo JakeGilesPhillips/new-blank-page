@@ -43,7 +43,7 @@ const Home = (props: HomeProps) => {
   );
 };
 
-export async function getStaticProps(params: any) {
+export async function getServerSideProps(params: any) {
   const items = await getItems();
   return { props: { items } };
 }
